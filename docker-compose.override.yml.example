@@ -1,0 +1,38 @@
+# docker-compose.override.yml.example
+# Copy this to docker-compose.override.yml for local customizations
+
+version: '3.8'
+
+services:
+  web:
+    # Override ports if needed
+    ports:
+      - "3001:3000"  # Use port 3001 instead of 3000
+    
+    # Add additional environment variables
+    environment:
+      # Add your custom environment variables here
+      RAILS_LOG_LEVEL: debug
+      
+    # Override volumes if needed
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+      - /app/tmp  # Don't mount tmp directory
+
+  # Override database settings if needed
+  db:
+    environment:
+      POSTGRES_DB: gamusic_admin_custom
+      # Use different database name
+    
+    # Use different port
+    ports:
+      - "5433:5432"
+
+  # Add additional services
+  # mailcatcher:
+  #   image: schickling/mailcatcher
+  #   ports:
+  #     - "1080:1080"
+  #     - "1025:1025"

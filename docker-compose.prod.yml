@@ -1,0 +1,22 @@
+# Production overrides for docker-compose
+version: '3.8'
+
+services:
+  web:
+    environment:
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: true
+      RAILS_SERVE_STATIC_FILES: true
+    command: >
+      bash -c "
+        bundle exec rails db:prepare &&
+        bundle exec rails assets:precompile &&
+        bundle exec rails server -b 0.0.0.0 -e production
+      "
+    
+  # Production database (external)
+  # Remove db service and use external Supabase
+  
+  # Production Redis (can use external service)
+  redis:
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}

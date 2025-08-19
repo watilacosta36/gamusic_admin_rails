@@ -1,0 +1,127 @@
+<% content_for :page_title, "Novo Desafio" %>
+
+<div class="max-w-4xl">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Criar Novo Desafio</h1>
+    <p class="text-gray-600 dark:text-gray-400 mt-2">Preencha os dados do desafio musical</p>
+  </div>
+
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow">
+    <div class="p-6">
+      <%= form_with model: @challenge, local: true, html: { multipart: true, class: "space-y-6" } do |form| %>
+        <% if @challenge.errors.any? %>
+          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+            <h4 class="font-bold">Erro ao salvar:</h4>
+            <ul class="list-disc list-inside">
+              <% @challenge.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <!-- Informações básicas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="md:col-span-2">
+            <%= form.label :title, "Título do Desafio", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+            <%= form.text_field :title, 
+                class: "mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" %>
+          </div>
+
+          <div>
+            <%= form.label :category, "Categoria", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+            <%= form.select :category, 
+                options_for_select([
+                  ['Selecione a categoria', ''],
+                  ['Escala', 'escala'],
+                  ['Acorde', 'acorde'], 
+                  ['Arpejo', 'arpejo'],
+                  ['Ritmo', 'ritmo'],
+                  ['Melodia', 'melodia'],
+                  ['Harmonia', 'harmonia'],
+                  ['Técnica', 'tecnica']
+                ], @challenge.category),
+                {},
+                { class: "mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" } %>
+          </div>
+
+          <div>
+            <%= form.label :difficulty, "Dificuldade", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+            <%= form.select :difficulty, 
+                options_for_select([
+                  ['Selecione a dificuldade', ''],
+                  ['Iniciante', 'iniciante'],
+                  ['Intermediário', 'intermediario'],
+                  ['Avançado', 'avancado']
+                ], @challenge.difficulty),
+                {},
+                { class: "mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" } %>
+          </div>
+
+          <div>
+            <%= form.label :music_key, "Tom Musical", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+            <%= form.select :music_key, 
+                options_for_select([
+                  ['Selecione o tom', ''],
+                  ['C', 'C'], ['C#', 'C#'], ['Db', 'Db'],
+                  ['D', 'D'], ['D#', 'D#'], ['Eb', 'Eb'],
+                  ['E', 'E'], ['F', 'F'], ['F#', 'F#'],
+                  ['Gb', 'Gb'], ['G', 'G'], ['G#', 'G#'],
+                  ['Ab', 'Ab'], ['A', 'A'], ['A#', 'A#'],
+                  ['Bb', 'Bb'], ['B', 'B']
+                ], @challenge.music_key),
+                {},
+                { class: "mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" } %>
+          </div>
+
+          <div>
+            <%= form.label :tempo, "Tempo (BPM)", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+            <%= form.number_field :tempo, 
+                class: "mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" %>
+          </div>
+        </div>
+
+        <!-- Descrição -->
+        <div>
+          <%= form.label :description, "Descrição", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+          <%= form.text_area :description, rows: 4,
+              class: "mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" %>
+        </div>
+
+        <!-- Instruções -->
+        <div>
+          <%= form.label :instructions, "Instruções", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+          <%= form.text_area :instructions, rows: 3,
+              class: "mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" %>
+        </div>
+
+        <!-- Upload de arquivos -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <%= form.label :musicxml_file, "Arquivo MusicXML", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+            <%= form.file_field :musicxml_file, 
+                accept: ".xml,.mxml",
+                class: "mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" %>
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Formatos aceitos: .xml, .mxml</p>
+          </div>
+
+          <div>
+            <%= form.label :pdf_file, "Arquivo PDF", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+            <%= form.file_field :pdf_file, 
+                accept: ".pdf",
+                class: "mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" %>
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Formato aceito: .pdf</p>
+          </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="flex justify-end space-x-4">
+          <%= link_to "Cancelar", challenges_path, 
+              class: "px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-600" %>
+          <%= form.submit "Criar Desafio", 
+              class: "px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

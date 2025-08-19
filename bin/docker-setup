@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# GaMusic Admin Rails - Docker Setup Script
+echo "🎵 GaMusic Admin Rails - Docker Setup"
+echo "======================================"
+
+# Check if Docker is installed
+if ! command -v docker &> /dev/null; then
+    echo "❌ Docker não encontrado. Instale o Docker primeiro."
+    exit 1
+fi
+
+# Check if Docker Compose is installed
+if ! command -v docker-compose &> /dev/null; then
+    echo "❌ Docker Compose não encontrado. Instale o Docker Compose primeiro."
+    exit 1
+fi
+
+echo "✅ Docker e Docker Compose encontrados"
+
+# Create .env file if it doesn't exist
+if [ ! -f .env ]; then
+    echo "📋 Criando arquivo .env..."
+    cp .env.docker .env
+    echo "⚠️  IMPORTANTE: Edite o arquivo .env com suas credenciais Supabase!"
+    echo "   Arquivo criado: .env"
+else
+    echo "✅ Arquivo .env já existe"
+fi
+
+echo ""
+echo "🚀 Próximos passos:"
+echo "1. Edite o arquivo .env com suas credenciais Supabase:"
+echo "   nano .env"
+echo ""
+echo "2. Build e execute a aplicação:"
+echo "   make build"
+echo "   make up"
+echo ""
+echo "3. Ou use o comando de desenvolvimento:"
+echo "   make dev"
+echo ""
+echo "4. Acesse a aplicação em:"
+echo "   http://localhost:3000"
+echo ""
+echo "5. Acesse o Adminer (admin do banco) em:"
+echo "   http://localhost:8080"
+echo ""
+echo "📖 Para mais comandos, execute: make help"
