@@ -5,6 +5,11 @@ FROM ruby:3.4.5-slim
 RUN apt-get update -qq && \
     apt-get install -y \
     build-essential \
+    libyaml-dev \
+    libssl-dev \
+    libreadline-dev \
+    zlib1g-dev \
+    pkg-config \
     libpq-dev \
     postgresql-client \
     nodejs \
