@@ -89,9 +89,7 @@
                   </p>
                 </div>
               </div>
-              <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                Download
-              </button>
+              <%= download_attachment_link(@challenge.musicxml_file) %>
             </div>
           </div>
 
@@ -109,9 +107,7 @@
                   </p>
                 </div>
               </div>
-              <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                Download
-              </button>
+              <%= download_attachment_link(@challenge.pdf_file) %>
             </div>
           </div>
         </div>

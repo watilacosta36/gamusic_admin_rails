@@ -32,14 +32,14 @@
             <%= form.label :category, "Categoria", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
             <%= form.select :category, 
                 options_for_select([
-                  ['Selecione a categoria', ''],
-                  ['Escala', 'escala'],
-                  ['Acorde', 'acorde'], 
-                  ['Arpejo', 'arpejo'],
-                  ['Ritmo', 'ritmo'],
-                  ['Melodia', 'melodia'],
-                  ['Harmonia', 'harmonia'],
-                  ['Técnica', 'tecnica']
+                                     ['Selecione a categoria', ''],
+                                     %w[Escala escala],
+                                     %w[Acorde acorde],
+                                     %w[Arpejo arpejo],
+                                     %w[Ritmo ritmo],
+                                     %w[Melodia melodia],
+                                     %w[Harmonia harmonia],
+                                     %w[Técnica tecnica]
                 ], @challenge.category),
                 {},
                 { class: "mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" } %>
@@ -49,10 +49,10 @@
             <%= form.label :difficulty, "Dificuldade", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
             <%= form.select :difficulty, 
                 options_for_select([
-                  ['Selecione a dificuldade', ''],
-                  ['Iniciante', 'iniciante'],
-                  ['Intermediário', 'intermediario'],
-                  ['Avançado', 'avancado']
+                                     ['Selecione a dificuldade', ''],
+                                     %w[Iniciante iniciante],
+                                     %w[Intermediário intermediario],
+                                     %w[Avançado avancado]
                 ], @challenge.difficulty),
                 {},
                 { class: "mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" } %>
@@ -62,13 +62,13 @@
             <%= form.label :music_key, "Tom Musical", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
             <%= form.select :music_key, 
                 options_for_select([
-                  ['Selecione o tom', ''],
-                  ['C', 'C'], ['C#', 'C#'], ['Db', 'Db'],
-                  ['D', 'D'], ['D#', 'D#'], ['Eb', 'Eb'],
-                  ['E', 'E'], ['F', 'F'], ['F#', 'F#'],
-                  ['Gb', 'Gb'], ['G', 'G'], ['G#', 'G#'],
-                  ['Ab', 'Ab'], ['A', 'A'], ['A#', 'A#'],
-                  ['Bb', 'Bb'], ['B', 'B']
+                                     ['Selecione o tom', ''],
+                                     %w[C C], %w[C# C#], %w[Db Db],
+                                     %w[D D], %w[D# D#], %w[Eb Eb],
+                                     %w[E E], %w[F F], %w[F# F#],
+                                     %w[Gb Gb], %w[G G], %w[G# G#],
+                                     %w[Ab Ab], %w[A A], %w[A# A#],
+                                     %w[Bb Bb], %w[B B]
                 ], @challenge.music_key),
                 {},
                 { class: "mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" } %>

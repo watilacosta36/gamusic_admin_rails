@@ -1,21 +1,17 @@
 class SessionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:new, :create]
   
-  def new
-    # Login form
-  end
+  def new; end
   
   def create
     auth_response = SupabaseService.authenticate_user(
       params[:email], 
       params[:password]
     )
-    
+
     if auth_response && auth_response['user']
-      # Create user record locally if needed
       user = User.find_or_create_from_supabase(auth_response['user'])
-      
-      # Store user session
+
       session[:user_id] = user.id
       session[:supabase_token] = auth_response['access_token']
       

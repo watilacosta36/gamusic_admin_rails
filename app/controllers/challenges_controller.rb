@@ -29,7 +29,7 @@ class ChallengesController < ApplicationController
     @challenge = current_user.challenges.build(challenge_params)
 
     if @challenge.save
-      redirect_to @challenge, notice: "Desafio criado com sucesso!"
+      redirect_to challenges_path, notice: "Desafio criado com sucesso!"
     else
       render :new, status: :unprocessable_entity
     end
