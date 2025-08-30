@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -56,11 +56,17 @@ services:
     tty: true
     command: >
       bash -c "
-        echo 'Waiting for database...' &&
-        while ! nc -z db 5432; do sleep 1; done &&
-        echo 'Database is ready!' &&
+        echo 'Starting Rails application...' &&
         rm -f tmp/pids/server.pid &&
-        bundle exec rails db:prepare &&
+        if [[ $${SUPABASE_DATABASE_URL} == *'supabase.co'* ]]; then
+          echo 'Using Supabase database...' &&
+          bundle exec rails db:migrate;
+        else
+          echo 'Waiting for local database...' &&
+          while ! nc -z db 5432; do sleep 1; done &&
+          echo 'Local database is ready!' &&
+          bundle exec rails db:prepare;
+        fi &&
         echo 'Starting Rails server...' &&
         bundle exec rails server -b 0.0.0.0
       "
