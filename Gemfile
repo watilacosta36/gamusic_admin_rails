@@ -4,7 +4,7 @@ gem "rails", "~> 8.0.2", ">= 8.0.2.1"             # Bundle edge Rails instead: g
 
 gem "propshaft"                                   # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 
-gem "pg", "~> 1.1"                                # Use postgresql as the database for Active Record
+gem "pg", "~> 1.6"                                # Use postgresql as the database for Active Record
 
 gem "puma", ">= 5.0"                              # Use the Puma web server [https://github.com/puma/puma]
 
